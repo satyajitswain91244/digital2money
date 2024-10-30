@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Network Marketing Pro</title>
+  <link rel="stylesheet" href="digital.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1 class="logo">Digital 2 Money</h1>
+    <button class="menu-toggle" id="menu-toggle">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h2>Unlock Your Financial Freedom</h2>
+      <p>Join a community of achievers and start your journey in network marketing.</p>
+      <a href="https://myshopprime.com/3way/7vmjzow" class="btn">Explore Our Products</a>
+      <button class="btn"><a href="https://www.instagram.com/digital_2_money?igsh=MW9mNTE1ZTl5MHV3Zg=="><h4>Join Us</h4></a></button>
+    </div>
+  </section> 
+
+
+  <!-- Payment Section -->
+  <section id="Payment" class="payment">
+    <h2>Make a Payment</h2>
+    <p>Use any of the methods below to make a payment:</p>
+
+    <div class="payment-methods">
+      <!-- QR Code Payment -->
+      <div class="qr-code">
+        <h3>Scan QR Code</h3>
+        <div class="qr-image">
+          <img src="e4415b0a-7732-4d2d-b50d-67398eaf340e.jpg" alt="QR Code">
+        </div>
+      </div>
+
+      <!-- UPI Payment -->
+      <div class="upi">
+        <h3>Pay via UPI</h3>
+        <p><a href="upi://pay?pa=satyajitswain985319@okhdfcbank&pn=digital2money&am=100&cu=INR" class="upi-link">Click to Pay with UPI</a></p>
+      </div>
+    </div>
+     <!-- receive Payment -->
+      <div class="receive">
+         <button type="send"> <a href="https://forms.gle/9kXbJ3ux3ceDTijJ9"><h3>Click here TO Send payment proof</h3></a></button>
+      </div>
+  </section>
+
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>NetworkPro is dedicated to providing the best resources for your network marketing journey. Our mission is to empower you.</p>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="service-container">
+      <div class="service">
+        <i class="fas fa-chart-line"></i>
+        <h3>Business Training</h3>
+        <p>Learn the skills to succeed in network marketing.</p>
+      </div>
+      <div class="service">
+        <i class="fas fa-users"></i>
+        <h3>Community Support</h3>
+        <p>Connect with like-minded individuals.</p>
+      </div>
+      <div class="service">
+        <i class="fas fa-bullhorn"></i>
+        <h3>Marketing Tools</h3>
+        <p>Utilize our resources to promote your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form>
+        <p><strong>Email:</strong> digital2money.private@gmail.com</p>
+      <p><strong>Mobile Number:</strong> +91 9124482285</p>
+      <p><strong>Mobile Number:</strong> +91 9861467720</p>
+      <p><strong>Address:</strong> 123 Network St, Marketing City, BBSR</p>
+      <button type="submit"> <a href="https://docs.google.com/forms/d/1MqkNBTk-Kot2iYYOnwzMqJYauPsz9jBJ4WoBdG6iRxg/viewform">Send Message</a></button>
+    </form>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #282c34;
+    color: #fff;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+  }
+  
+  .nav-links li {
+    margin-left: 20px;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #4CAF50;
+  }
+  .menu-toggle {
+    display: none;
+    font-size: 1.5em;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  /* Hero Section */
+  .hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .hero h2 {
+    font-size: 3rem;
+    animation: fadeInUp 1s ease;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    animation: fadeInUp 1.5s ease;
+  }
+  
+  .btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+  }
+  
+  .btn:hover {
+    background-color: #45a049;
+  }
+  .payment {
+    padding: 120px 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+  
+  .payment h2 {
+    margin-bottom: 10px;
+  }
+  
+  .payment-methods {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+  }
+  
+  .qr-code, .upi {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .qr-code:hover, .upi:hover {
+    transform: scale(1.1);
+  }
+  
+  .qr-code h3, .upi h3 {
+    font-size: 1.2rem;
+    color: #4CAF50;
+    margin-bottom: 10px;
+  }
+  
+  .qr-image img {
+    width: 100%;
+    animation: bounce 1s infinite;
+  }
+  /* UPI Link */
+.upi-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #4CAF50;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .upi-link:hover {
+    background-color: #45a049;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  /* About Section */
+  .about {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+  
+  .about h2 {
+    margin-bottom: 20px;
+  }
+  
+  /* Services Section */
+  .services {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: #e2e2e2;
+  }
+  
+  .service-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .service {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    margin: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .service:hover {
+    transform: scale(1.05);
+  }
+  
+  .service h3 {
+    margin-top: 10px;
+  }
+  
+  .service i {
+    font-size: 2rem;
+    color: #4CAF50;
+  }
+  
+  /* Contact Section */
+  .contact {
+    padding: 100px 20px;
+    text-align: center;
+  }
+  
+  .contact form {
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .contact input, .contact textarea, .contact button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .contact button {
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .receive button {
+    background-color: #4CAF50;
+    height: 40px;
+    width: 500px; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 80px;
+  }
+  
+  a{
+    color: #ffffff;
+    text-decoration: none;
+  }
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    /* Show the menu toggle button */
+    .menu-toggle {
+      display: block;
+    }
+  
+    /* Hide the nav-links by default */
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      background-color: #333;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 0;
+    }
+    .receive button {
+      background-color: #4CAF50;
+      height: 40px;
+      width:300px ;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 40px;
+    }
+    .nav-links.active {
+      display: flex;
+    }
+  
+    .nav-links li {
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+    }
+    .service {
+      background-color:#fff;
+      border-radius: 10px;
+      padding: 20px;
+      width: 40%;
+      margin: 10px;
+      transition: transform 0.3s ease;
+    }
+  }
+</style>
+<script>
+  
+document.getElementById("menu-toggle").addEventListener("click", function () {
+  const navLinks = document.getElementById("nav-links");
+  navLinks.classList.toggle("active");
+});
+
+</script>
