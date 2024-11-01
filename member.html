@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .tier {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+        }
+        .silver { background: #A6A6A6; }
+        .gold { background: #FFD700; color: #333; }
+        .diamond { background: #00BFFF; color: #fff; }
+        .progress {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Membership Levels</h1>
+    <p class="progress">Referrals: <span id="referralCount">0</span></p>
+
+    <div id="silverTier" class="tier silver">Silver Membership (20 Referrals)</div>
+    <div id="goldTier" class="tier gold">Gold Membership (45 Referrals)</div>
+    <div id="diamondTier" class="tier diamond">Diamond Membership (100 Referrals)</div>
+
+    <h2>Add a Referral</h2>
+    <input type="text" id="referralName" placeholder="Enter referral name" required>
+    <button onclick="addReferral()">Add Referral</button>
+    <br><br>
+    <button onclick="downloadHistory()">Download Referral History</button>
+</div>
+
+<script>
+    let referralCount = 0;
+
+    // Step 1: Open or Create the Database
+    const request = indexedDB.open("membershipDB", 1);
+
+    request.onupgradeneeded = function(event) {
+        const db = event.target.result;
+        db.createObjectStore("referrals", { keyPath: "id", autoIncrement: true });
+    };
+
+    request.onsuccess = function(event) {
+        const db = event.target.result;
+        loadReferralCount(db);
+    };
+
+    // Step 2: Load referral count from IndexedDB
+    function loadReferralCount(db) {
+        const transaction = db.transaction("referrals", "readonly");
+        const store = transaction.objectStore("referrals");
+        const countRequest = store.count();
+
+        countRequest.onsuccess = function() {
+            referralCount = countRequest.result;
+            updateMembershipDisplay();
+        };
+    }
+
+    // Step 3: Update membership display based on referral count
+    function updateMembershipDisplay() {
+        document.getElementById('referralCount').textContent = referralCount;
+        document.getElementById('silverTier').style.opacity = referralCount >= 20 ? '1' : '0.5';
+        document.getElementById('goldTier').style.opacity = referralCount >= 45 ? '1' : '0.5';
+        document.getElementById('diamondTier').style.opacity = referralCount >= 100 ? '1' : '0.5';
+    }
+
+    // Step 4: Add new referral to IndexedDB
+    function addReferral() {
+        const referralName = document.getElementById('referralName').value;
+        if (!referralName) {
+            alert("Please enter a referral name.");
+            return;
+        }
+
+        const dbRequest = indexedDB.open("membershipDB", 1);
+        dbRequest.onsuccess = function(event) {
+            const db = event.target.result;
+            const transaction = db.transaction("referrals", "readwrite");
+            const store = transaction.objectStore("referrals");
+
+            store.add({ name: referralName });
+            transaction.oncomplete = function() {
+                referralCount++;
+                updateMembershipDisplay();
+                document.getElementById('referralName').value = ""; // Clear input field
+                alert("Referral added!");
+            };
+        };
+    }
+
+    // Step 5: Download referral history as JSON file
+    function downloadHistory() {
+        const dbRequest = indexedDB.open("membershipDB", 1);
+        dbRequest.onsuccess = function(event) {
+            const db = event.target.result;
+            const transaction = db.transaction("referrals", "readonly");
+            const store = transaction.objectStore("referrals");
+
+            const allReferrals = [];
+            store.openCursor().onsuccess = function(event) {
+                const cursor = event.target.result;
+                if (cursor) {
+                    allReferrals.push(cursor.value);
+                    cursor.continue();
+                } else {
+                    const json = JSON.stringify(allReferrals, null, 2);
+                    const blob = new Blob([json], { type: "application/json" });
+                    const url = URL.createObjectURL(blob);
+                    
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "referral_history.json";
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+            };
+        };
+    }
+</script>
+
+</body>
+</html>
