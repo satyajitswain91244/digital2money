@@ -3,83 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Referral ID Generator</title>
+    <title>Membership ID Generator</title>
     <style>
+        /* Full-Screen Gradient Background Animation */
         body {
             font-family: Arial, sans-serif;
+            color: #fff;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc, #ff4e50, #f9d423);
+            background-size: 200% 200%;
+            animation: bgGradient 15s ease infinite;
             margin: 0;
-            background-color: #f4f4f4;
         }
+
+        /* Animated Background Gradient */
+        @keyframes bgGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container Styling */
         .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 15px;
             text-align: center;
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        input {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
             width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+
+        .container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
-        button:hover {
-            background-color: #0056b3;
+
+        /* Title */
+        h1 {
+            font-size: 2rem;
+            color: #4e54c8;
+            margin-bottom: 1rem;
         }
-        p {
-            margin-top: 15px;
-            font-weight: bold;
+
+        /* Input Field Styling */
+        input[type="text"] {
+            width: 80%;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 2px solid #4e54c8;
+            border-radius: 10px;
+            font-size: 1rem;
             color: #333;
+            outline: none;
+            background: rgba(255, 255, 255, 0.85);
+            transition: border-color 0.4s ease, background-color 0.4s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #ff4e50;
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        /* Button Styling */
+        button {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            color: #fff;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            box-shadow: 0 8px 20px rgba(38, 138, 255, 0.4);
+        }
+
+        /* Displayed ID Styling */
+        #user-id-display {
+            margin-top: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #4e54c8;
+            display: none; /* Initially hidden */
+        }
+
+        #user-id-display.show {
+            display: block;
+            animation: slideUpFade 1s forwards ease;
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h2>Generate Your Referral ID</h2>
-        
-        <label for="userNumber">Enter Your Number:</label>
-        <input type="text" id="userNumber" placeholder="Your Number" required>
-        
-        <button onclick="generateReferralID()">Get Referral ID</button>
-
-        <p id="referralMessage"></p>
+        <h1>Get Your Membership ID</h1>
+        <label for="phone">Enter your phone number:</label>
+        <input type="text" id="phone" placeholder="Enter phone number">
+        <button onclick="generateOrRetrieveId()">Get Your ID</button>
+        <div id="user-id-display"></div>
     </div>
 
     <script>
-        function generateReferralID() {
-            const userNumber = document.getElementById("userNumber").value;
+        // Hashing function to generate a unique ID based on the phone number
+        function hashPhoneNumber(phoneNumber) {
+            let hash = 0;
+            for (let i = 0; i < phoneNumber.length; i++) {
+                hash = ((hash << 5) - hash) + phoneNumber.charCodeAt(i);
+                hash |= 0; // Convert to 32bit integer
+            }
+            return `D2M-${Math.abs(hash)}`;
+        }
 
-            // Validate user input
-            if (!userNumber || isNaN(userNumber)) {
-                alert("Please enter a valid number.");
+        // Function to generate or retrieve the ID
+        function generateOrRetrieveId() {
+            const phone = document.getElementById("phone").value.trim();
+            if (phone === "") {
+                alert("Please enter a phone number.");
                 return;
             }
 
-            // Generate Referral ID
-            const referralID = "D2M" + Math.floor(1000 + Math.random() * 9000);
-            document.getElementById("referralMessage").innerText = `Your Referral ID: ${referralID}`;
+            // Check if the ID already exists in localStorage for this phone number
+            const storedId = localStorage.getItem(`id_${phone}`);
+            let userId;
+
+            if (storedId) {
+                userId = storedId;
+            } else {
+                // Generate a new ID using the hashing function and save it
+                userId = hashPhoneNumber(phone);
+                localStorage.setItem(`id_${phone}`, userId);
+            }
+
+            // Display the user ID
+            const displayElement = document.getElementById("user-id-display");
+            displayElement.innerText = `Your User ID: ${userId}`;
+            displayElement.classList.add("show");
         }
     </script>
-
 </body>
 </html>
