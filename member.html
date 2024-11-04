@@ -44,8 +44,8 @@
     <h1>Membership Levels</h1>
     <p class="progress">Referrals: <span id="referralCount">0</span></p>
 
-    <div id="silverTier" class="tier silver">Silver Membership (20 Referrals)</div>
-    <div id="goldTier" class="tier gold">Gold Membership (45 Referrals)</div>
+    <div id="silverTier" class="tier silver">Silver Membership (25 Referrals)</div>
+    <div id="goldTier" class="tier gold">Gold Membership (50 Referrals)</div>
     <div id="diamondTier" class="tier diamond">Diamond Membership (100 Referrals)</div>
 
     <h2>Add a Referral</h2>
@@ -86,8 +86,8 @@
     // Step 3: Update membership display based on referral count
     function updateMembershipDisplay() {
         document.getElementById('referralCount').textContent = referralCount;
-        document.getElementById('silverTier').style.opacity = referralCount >= 20 ? '1' : '0.5';
-        document.getElementById('goldTier').style.opacity = referralCount >= 45 ? '1' : '0.5';
+        document.getElementById('silverTier').style.opacity = referralCount >= 25 ? '1' : '0.5';
+        document.getElementById('goldTier').style.opacity = referralCount >= 50 ? '1' : '0.5';
         document.getElementById('diamondTier').style.opacity = referralCount >= 100 ? '1' : '0.5';
     }
 
